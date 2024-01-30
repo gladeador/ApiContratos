@@ -1,0 +1,14 @@
+ composer install
+
+php artisan migrate
+
+php artisan db:seed
+
+ php artisan storage:link
+ composer dump-autoload
+
+
+ npm install
+
+#para generar controladores CRUD
+ php artisan make:controller DetalleProfileController --resource --model=DetalleProfile

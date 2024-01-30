@@ -1,0 +1,43 @@
+/*html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}*/
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}   
+
+@keyframes particleAnimation {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #3498db;
+    opacity: 0.7;
+    bottom: 100%;
+}
+
