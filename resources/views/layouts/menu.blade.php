@@ -63,3 +63,9 @@ $menus = DB::table('permisos')
         </ul>
     </li>
 @endforeach
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit" class="btn btn-block btn-danger btn-lg" style="color: white">
+        <i class="fas fa-power-off"></i> cerrar sesión
+    </button>
+</form>

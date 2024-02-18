@@ -35,7 +35,7 @@
         "datatables.net-buttons-dt": "^1.7.1",
         "datatables.net-dt": "^1.1.0",
         "jshint": "^2.13.4",
-        "sweetalert2": "^11.4.8",
+        "sweetalert2": "^11.6.13",
         "vue-socket.io": "^3.0.10"
     }
 }

@@ -14,4 +14,15 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+
+    protected $redirectTo = '/login';
+
+    public function handle($request, \Closure $next)
+    {
+        try {
+            return parent::handle($request, $next);
+        } catch (\Illuminate\Session\TokenMismatchException $e) {
+            return redirect()->to($this->redirectTo);
+        }
+    }
 }

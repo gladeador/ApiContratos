@@ -1,12 +1,4 @@
 
-{{-- {{
-    use App\Models\DetalleProfile;
-    use App\Models\Profile;
-
-}}
- --}}
-
-
 
 <div class="card-body">
     <table id="example1" class="table table-bordered table-striped">

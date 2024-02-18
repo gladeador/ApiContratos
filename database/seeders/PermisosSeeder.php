@@ -58,6 +58,36 @@ class PermisosSeeder extends Seeder
                     'graba' => '1',
                     'borra' => '1',
                     'estado' => '1',
+                ],
+                [
+                    'id' => '5',
+                    'profile_id' => '1',
+                    'menu_id' => '2',
+                    'submenu_id' => '5',
+                    'lee' => '1',
+                    'graba' => '1',
+                    'borra' => '1',
+                    'estado' => '1',
+                ],
+                [
+                    'id' => '6',
+                    'profile_id' => '1',
+                    'menu_id' => '3',
+                    'submenu_id' => '6',
+                    'lee' => '1',
+                    'graba' => '1',
+                    'borra' => '1',
+                    'estado' => '1',
+                ],
+                [
+                    'id' => '7',
+                    'profile_id' => '1',
+                    'menu_id' => '3',
+                    'submenu_id' => '7',
+                    'lee' => '1',
+                    'graba' => '1',
+                    'borra' => '1',
+                    'estado' => '1',
                 ]
                 // Agregar otros permisos según sea necesario
             ]);

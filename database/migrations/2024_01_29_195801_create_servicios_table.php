@@ -13,37 +13,34 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             // Identificador único del servicio
-            $table->id();
-    
-            // Nombre del servicio
-            $table->string('nombre_servicio');
-    
-            // Indica si el servicio tiene renovación automática al terminar las horas
-            $table->boolean('renovacion_automatica')->default(false);
-    
-            // Fecha de inicio y fin del servicio
+            $table->increments('id');
+            
+            // identificador del servicio
+            $table->string('servicio_tree_select')->nullable();
+                
+            // Fecha de inicio y fin del contrato
             $table->date('fecha_inicio');
-            $table->date('fecha_termino');
-    
-            // Tipo de contrato (Servicio o materia del contrato)
-            $table->string('tipo_contrato');
+            $table->date('fecha_fin');
     
             // Tipo de horas a consumir (mensuales, anuales, temporales)
-            $table->enum('tipo_horas', ['mensuales', 'anuales', 'temporales']);
+            $table->enum('tipo_horas', ['mensuales', 'anuales', 'spot']);
     
             // Horas del servicio y horas adicionales (inicializado a 0)
             $table->decimal('horas_servicio', 12, 2);
             $table->decimal('horas_adicionales', 12, 2)->default(0);
     
-            // Indica si las horas mensuales son acumulables
-            $table->boolean('horas_acumulables')->default(false);
+            // Indica las horas ocupadas del servicio
+            $table->boolean('horas_ocupadas')->default(false);
     
             // Texto del contrato (puede ser nulo)
             $table->text('contrato_texto')->nullable();
     
             // Ruta del archivo PDF del contrato (puede ser nulo)
             $table->string('pdf_path')->nullable();
-    
+            
+            // Estado del servicio (Activo, Inactivo, Terminado por defecto: Activo)
+            $table->enum('estado_servicio', ['Activo', 'Inactivo', 'Terminado'])->default('Activo');
+            
             // Clave foránea para la relación con contratos (restricción restrict)
             $table->foreignId('contrato_id')->constrained()->onUpdate('cascade')->onDelete('restrict');
 

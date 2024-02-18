@@ -13,7 +13,7 @@ class Profile extends Model
     protected $fillable = [
         'id','nombre', 'descripcion', 'condicion'
     ];
-    public $timestamps=false;
+    public $timestamps=true;
 
     public function users(){
         {

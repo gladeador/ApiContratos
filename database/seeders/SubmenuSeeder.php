@@ -29,21 +29,21 @@ class SubmenuSeeder extends Seeder
             // Insertar nuevos submenús
             Submenu::insert([
                 [
-                    'menu_id' => $menuHijo->id,
+                    'menu_id' => 1,
                     'descripcion' => 'Mantenimiento Usuarios',
                     'ruta' => 'user',
                     'orden' => 1,
                     'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
                 ],
                 [
-                    'menu_id' => $menuHijo->id,
+                    'menu_id' => 1,
                     'descripcion' => 'Perfil Usuario',
                     'ruta' => 'profile',
                     'orden' => 2,
                     'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
                 ],
                 [
-                    'menu_id' => $menuHijo->id,
+                    'menu_id' => 1,
                     'descripcion' => 'Permisos',
                     'ruta' => 'permisos',   
                     'orden' => 3,
@@ -51,11 +51,32 @@ class SubmenuSeeder extends Seeder
                 ],
                 [
                     'menu_id' => 2,
-                    'descripcion' => 'Configuración',
-                    'ruta' => 'configuracion',   
-                    'orden' => 3,
+                    'descripcion' => 'Contratos',
+                    'ruta' => 'contratos',   
+                    'orden' => 1,
                     'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
                 ],
+                [
+                    'menu_id' => 2,
+                    'descripcion' => 'Servicios',
+                    'ruta' => 'servicios',   
+                    'orden' => 2,
+                    'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
+                ],
+                [
+                    'menu_id' => 3,
+                    'descripcion' => 'Configuración',
+                    'ruta' => 'configuracion',   
+                    'orden' => 1,
+                    'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
+                ],
+                [
+                    'menu_id' => 3,
+                    'descripcion' => 'Ejecutivos',
+                    'ruta' => 'ejecutivos',   
+                    'orden' => 2,
+                    'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
+                ]
             ]);
         }
 

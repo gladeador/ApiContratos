@@ -25,21 +25,31 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 /*user*/
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
 //Route::post('/user', [App\Http\Controllers\UserController::class, 'verificaEmail']);
-Route::resource('user', 'App\Http\Controllers\UserController');
+Route::resource('user', 'App\Http\Controllers\UserController')->middleware('auth');
 
 /*perfiles*/
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth');
-Route::resource('profile', 'App\Http\Controllers\ProfileController');
+Route::resource('profile', 'App\Http\Controllers\ProfileController')->middleware('auth');
 
 /*permisos*/
 Route::get('/permisos', [App\Http\Controllers\PermisosController::class, 'index'])->middleware('auth');
-Route::resource('permisos', 'App\Http\Controllers\PermisosController');
+Route::resource('permisos', 'App\Http\Controllers\PermisosController')->middleware('auth');
 
 /*config*/
 Route::get('/configuracion', [App\Http\Controllers\ConfigController::class, 'index'])->middleware('auth');
-Route::resource('configuracion', 'App\Http\Controllers\ConfigController');
+Route::resource('configuracion', 'App\Http\Controllers\ConfigController')->middleware('auth');
 
+/*ejecutivos*/
+Route::get('/ejecutivos', [App\Http\Controllers\EjecutivosController::class, 'index'])->middleware('auth');
+Route::resource('ejecutivos', 'App\Http\Controllers\EjecutivosController')->middleware('auth');
 
+/*Contratos*/
+Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->middleware('auth');
+Route::resource('contratos', 'App\Http\Controllers\ContratoController')->middleware('auth');
+
+/*Servicios*/
+Route::get('/servicios', [App\Http\Controllers\ServicioController::class, 'index'])->middleware('auth');
+Route::resource('servicios', 'App\Http\Controllers\ServicioController')->middleware('auth');
 
 /* LDAP */
 Route::get('/ldap', [LdapController::class, 'index'])->name('ldap.index')->middleware('auth');

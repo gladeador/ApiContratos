@@ -2,8 +2,8 @@ $(function () {
     $("#example1").DataTable({
         "responsive": true,
         "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
         "language": {
-
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
@@ -335,6 +335,72 @@ function activeMenu() {
 
 }); */
 
+//modal editar ejecutivo
+$('#modalEditarEjecutivo').on('show.bs.modal', function (event) {
 
+    //console.log('modal abierto');
+    /*el button.data es lo que está en el button de editar*/
+    var button = $(event.relatedTarget);
+    var nombre_modal_editar = button.data('nombre');
+    var apellido_modal_editar = button.data('apellido');
+    var descripcion_modal_editar = button.data('descripcion');
+    var id_ejecutivo = button.data('id_ejecutivo');
+    var modal = $(this);
 
+    /*los # son los id que se encuentran en el formulario*/
+    modal.find('.modal-body #nombre').val(nombre_modal_editar);
+    modal.find('.modal-body #apellido').val(apellido_modal_editar);
+    modal.find('.modal-body #descripcion').val(descripcion_modal_editar);
+    modal.find('.modal-body #id_ejecutivo').val(id_ejecutivo);
+})
 
+//Eliminar ejecutivo
+$(document).on("click", ".btnEliminarEjecutivo", function () {
+
+    var id_ejecutivo = $(this).attr("idejecutivo");
+    var ruta = $(this).attr("ruta");
+    var url = ruta + "/" + id_ejecutivo;
+    Swal.fire({
+        title: 'Estas seguro(a)?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, elimínalo!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                data: {
+                    _method: 'DELETE',
+                    id_ejecutivo: id_ejecutivo
+                },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'DELETE',
+                success: function (res) {
+                    // Do something with the result
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'El ejecutivo ha sido eliminado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.location = "ejecutivos";
+                },
+                error: function (data) {
+                    Swal.fire(
+                        'ERROR!',
+                        'El ejecutivo no pudo ser eliminado.',
+                        'error'
+                    )
+                }
+            })
+
+        }
+    })
+});

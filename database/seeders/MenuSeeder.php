@@ -50,8 +50,16 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'descripcion' => 'Mantenedor',
+                'descripcion' => 'Contratos',
                 'orden' => 2,
+                'icono' => 'nav-icon fas fa-file-contract',
+                'hijo' => 1,
+                'ruta' => 'contratos',
+            ],
+            [
+                'id' => 3,
+                'descripcion' => 'Mantenedor',
+                'orden' => 3,
                 'icono' => 'nav-icon fas fa-wrench',
                 'hijo' => 1,
                 'ruta' => 'mantenedor',
