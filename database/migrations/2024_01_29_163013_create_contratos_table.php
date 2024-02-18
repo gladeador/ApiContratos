@@ -27,9 +27,9 @@ return new class extends Migration {
             // Descripción del contrato (puede ser nula)
             $table->text('descripcion')->nullable();
 
-            // Tipo de horas a consumir (mensuales, anuales, temporales)
+            // Tipo de Contrato (mensuales, anuales, temporales)
             $table->enum('tipo_horas', ['mensuales', 'anuales', 'spot']);
-            
+
             // Horas del contrato que se dividira en todos los servicios(inicializado a 0)
             $table->decimal('horas_contrato', 12, 2)->default(0);
 
@@ -38,6 +38,12 @@ return new class extends Migration {
 
             // Indica las horas ocupadas del contrato
             $table->decimal('horas_ocupadas', 12, 2)->default(0);
+
+            // Texto del contrato (puede ser nulo)
+            $table->text('contrato_texto')->nullable();
+
+            // Ruta del archivo PDF del contrato (puede ser nulo)
+            $table->string('pdf_path')->nullable();
 
             // Indica si el contrato tiene renovación automática al terminar las horas
             $table->boolean('renovacion_automatica')->default(false);
