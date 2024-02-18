@@ -14,16 +14,14 @@
         crossorigin="anonymous" />
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <!--Mi Estilo particulas-->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 
 <body class="hold-transition login-page">
-    <div id="particles-js"></div>
-    <div class="contenedor login-box">
+    <div class="login-box">
         <div class="login-logo">
-            <img src="{{ asset('img/Logo-Valuetech.svg') }}" class="img-responsive">
+            <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
         </div>
         <!-- /.login-logo -->
 
@@ -42,7 +40,7 @@
                             <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                         </div>
                         @error('email')
-                        <span class="error invalid-feedback">{{ $message }}</span>
+                            <span class="error invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -55,7 +53,7 @@
                             </div>
                         </div>
                         @error('password')
-                        <span class="error invalid-feedback">{{ $message }}</span>
+                            <span class="error invalid-feedback">{{ $message }}</span>
                         @enderror
 
                     </div>
@@ -74,25 +72,11 @@
 
                     </div>
                 </form>
-                <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-dark">
-                        <i class="fab fa-microsoft mr-2"></i> Iniciar Sesión con Oficce 365
-                    </a>
-                    <a href="#" class="btn btn-block btn-info">
-                        <i class="fab fa-microsoft mr-2"></i> Iniciar Sesión con Oficce 365
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-microsoft mr-2"></i> Iniciar Sesión con Oficce 365
-                    </a>
-                    <a href="#" class="btn btn-block btn-link">
-                        <i class="fab fa-microsoft mr-2"></i> Iniciar Sesión con Oficce 365
-                    </a>
-                </div>
+
                 <p class="mb-1">
                     <a href="{{ route('password.request') }}">Olvide mi Password</a>
                 </p>
-                {{--  <p class="mb-0">
+               {{--  <p class="mb-0">
                     <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
                 </p> --}}
             </div>
@@ -102,9 +86,7 @@
     </div>
     <!-- /.login-box -->
 
-    <!--js Particles-->
-    <script src="{{ asset('js/particles.min.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 </body>
 
