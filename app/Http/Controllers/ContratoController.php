@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contrato;
+use App\Models\Ejecutivos;
 use Illuminate\Http\Request;
 use DB;
 
@@ -14,21 +15,38 @@ class ContratoController extends Controller
     public function index(Request $request)
     {
         //
-        if($request){
+        if ($request) {
 
-            $sql=trim($request->get('buscarTexto'));
-            $contratos=DB::table('contratos')->where('organizacion_id','LIKE','%'.$sql.'%')
-            ->orderBy('id','desc')
-            ->paginate(10000);
+            $sql = trim($request->get('buscarTexto'));
+            $contratos = DB::table('contratos')->where('organizacion_id', 'LIKE', '%' . $sql . '%')
+                ->orderBy('id', 'desc')
+                ->paginate(10000);
 
             // Instancia el controlador ApiController
             $apiController = new ApiController();
 
             // Obtiene las organizaciones
             $organizaciones = $apiController->fetchDataFromApiOrganizations();
-            return view('contratos.index',["contratos"=>$contratos,"organizaciones"=>$organizaciones,"buscarTexto"=>$sql]);
+            return view('contratos.index', ["contratos" => $contratos, "organizaciones" => $organizaciones, "buscarTexto" => $sql]);
             //return $profile;
         }
+    }
+
+    public function contrato()
+    {
+
+        // Instancia el controlador ApiController
+        $apiController = new ApiController();
+        // Obtiene las organizaciones
+        $organizaciones = $apiController->fetchDataFromApiOrganizations();
+
+        // obtiene ejecutivos
+        /*$ejecutivos= DB::table("ejecutivos")->get();*/
+        $ejecutivos = DB::table('ejecutivos')
+            ->select('id', 'nombre', 'apellido', 'descripcion')
+            ->where('estado', '=', '1')->get();
+
+        return view('contratos.contrato', ['organizaciones' => $organizaciones, 'ejecutivos' => $ejecutivos]);
     }
 
     /**
@@ -50,7 +68,7 @@ class ContratoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ccontrato $ccontrato)
+    public function show(Contrato $ccontrato)
     {
         //
     }

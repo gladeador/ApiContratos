@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
@@ -18,13 +19,26 @@ class ApiController extends Controller
     // Método para obtener datos de la API 1 utilizando el token de autenticación
     public function fetchDataFromApiOrganizations()
     {
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->apiToken,
-        ])->get('https://valuedesk2.valuetech.cl/api/v1/organizations');
 
-        return $response->json();
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->apiToken,
+            ])->timeout(30)->get('https://valuedesk2.valuetech.cl/api/v1/organizations');
+
+            return $response->json();
+            
+        } catch (\Exception $e) {   
+            // Si se produce un error de tiempo de espera (timeout)
+            if ($e->getCode() === CURLE_OPERATION_TIMEOUTED) {
+                return redirect()->route('home')->with('toast_error', 'La solicitud ha excedido el tiempo límite.');
+            }
+            // Si se produce otro tipo de error
+            return redirect()->route('home')->with('toast_error', 'Se produjo un error al realizar la solicitud a la API.');
+        }
     }
- 
+
+
+
     // Método para obtener datos de la API 2 utilizando el token de autenticación
     public function fetchDataFromApi2()
     {

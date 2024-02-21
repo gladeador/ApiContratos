@@ -46,6 +46,8 @@ Route::resource('ejecutivos', 'App\Http\Controllers\EjecutivosController')->midd
 /*Contratos*/
 Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->middleware('auth');
 Route::resource('contratos', 'App\Http\Controllers\ContratoController')->middleware('auth');
+Route::get('/contrato', 'App\Http\Controllers\ContratoController@contrato')->middleware('auth');
+
 
 /*Servicios*/
 Route::get('/servicios', [App\Http\Controllers\ServicioController::class, 'index'])->middleware('auth');
