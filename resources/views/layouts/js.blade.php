@@ -1,5 +1,8 @@
  <!-- jQuery -->
  <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+<script src="{{ asset('js/app.js') }}"> </script>
+
  <!-- Bootstrap 4 -->
  <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -9,10 +12,7 @@
 
  <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
- <!-- DataTables  & Plugins -->
+     <!-- DataTables  & Plugins -->
  <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
  <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -33,6 +33,8 @@
  <!-- AdminLTE App -->
 
  <script src="{{ asset('dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+
+
 
  <!-- AdminLTE for demo purposes -->
  <!--<script src = "{{ asset('dist/js/demo.js') }}"></script> -->

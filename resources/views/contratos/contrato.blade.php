@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Formulario</h1>
+                <h1>Formulario Contrato</h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -18,21 +18,23 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('contratos.store') }}" method="POST">
+                        <form action="{{ route('contratos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="organizacion_id">Organización</label>
-                                        <select class="form-control" id="organizacion_id" name="organizacion_id"
+                                        <select class="form-control verorganizacioncreada" id="organizacion_consulta" name="organizacion_consulta"
                                             required>
                                             <option value="">Selecciona una organización</option>
                                             @foreach ($organizaciones as $organizacion)
-                                            <option value="{{ $organizacion['id'] }}">{{ $organizacion['name'] }}
+                                            <option value="{{ $organizacion['id'] }}" {{
+                                            $organizacion_id == $organizacion['id'] ? 'selected' : '' }}>{{ $organizacion['name'] }}
                                             </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div id="organizacioncreada"></div>
 
                                 </div>
                                 <div class="col-md-4">
@@ -54,7 +56,7 @@
                             </div>
 
                             <!-- Aqui hacemos un div para continuar formulario del contrato en caso de ser true -->
-                            <div id="contrato" style="display: none;">
+                            <div id="contrato">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -79,7 +81,7 @@
                                                 <option value="">Selecciona un ejecutivo</option>
                                                 @foreach ($ejecutivos as $ejecutivo)
                                                 <option value="{{ $ejecutivo->id }}">{{ $ejecutivo->nombre }} {{
-                                                    $ejecutivo->apellido }}</option>
+                                                $ejecutivo->apellido }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -90,9 +92,9 @@
                                             <select class="form-control" id="tipocontrato" name="tipocontrato"
                                                 tabindex="7" required>
                                                 <option value="">Selecciona un tipo contrato</option>
-                                                <option value="1">Mensuales</option>
-                                                <option value="2">Anuales</option>
-                                                <option value="3">Spot</option>
+                                                <option value="mensuales">Mensuales</option>
+                                                <option value="anuales">Anuales</option>
+                                                <option value="spot">Spot</option>
                                             </select>
                                         </div>
                                     </div>
@@ -112,9 +114,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="horasadicionales">Subir Contrato PDF</label>
+                                            <label for="pdf_contrato">Subir Contrato PDF</label>
                                             <input type="file" class="form-control" id="pdf_contrato"
-                                                name="pdf_contrato" tabindex="10" required>
+                                                accept="application/pdf" name="pdf_contrato" tabindex="10" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -128,13 +130,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="horasadicionales">Horas Contrato</label>
-                                            <input type="decimal" class="form-control" id="horasadicionales"
-                                                name="horasadicionales" tabindex="12" required>
-                                        </div>
-                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="organizacion_id">Texto Contrato</label>
@@ -146,56 +141,8 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                <button type="submit" class="btn btn-primary botongurdarcontrato">Enviar</button>
 
-                            </div>
-                            <!-- Aqui hacemos un div para continuar formulario del servicio en caso de ser false -->
-                            <div id="servicio" style="display: none;">
-                                <div class="row">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:10px">#</th>
-                                                    <th>Organización</th>
-                                                    <th>Fecha Inicio</th>
-                                                    <th>Fecha Termino</th>
-                                                    <th>Ejecutivo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td>4</td>
-                                                    <td>5</td>
-                                                    <td>6</td>
-                                                    <td>
-                                                        <button class="btn btn-warning btn-sm  btnEditarPerfil"                                                           
-                                                            data-target="#modalEditarcontrato"><i
-                                                                class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-danger btn-sm btnEliminarcontrato"
-                                                            idcontrato=""
-                                                            ruta=""><i
-                                                                class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th style="width:10px">#</th>
-                                                    <th>Organización</th>
-                                                    <th>Fecha Inicio</th>
-                                                    <th>Fecha Termino</th>
-                                                    <th>Ejecutivo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -208,8 +155,29 @@
     CKEDITOR.replace('textocontrato');
 </script>
 @push('page_scripts')
-
 <script src="{{ asset('js/contrato.js') }}"></script>
 @endpush
-<!-- Bootstrap Switch JS -->
+<!-- alert sweetalert -->
+@if (Session::has('toast_success'))
+<script>
+    Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ Session::get('toast_success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            })
+</script>
+@endif
+@if (Session::has('toast_error'))
+<script>
+    Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ Session::get('toast_error') }}',
+                showConfirmButton: false,
+                timer: 1500
+            })
+</script>
+@endif
 @endsection

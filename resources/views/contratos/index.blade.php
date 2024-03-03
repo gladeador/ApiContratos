@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="box-header with-border">
-                        <a href="/contrato" class="btn btn-primary">Agregar contrato</a>
+                        <a href="/contrato/0" class="btn btn-primary agregacontrato">Agregar contrato</a>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -45,12 +45,12 @@
                             @foreach ($contratos as $contrato)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $contrato->organizacion_id }}</td>
+                                <td>{{ $contrato->organizacion_name }}</td>
                                 <td>{{ $contrato->fecha_inicio }}</td>
                                 <td>{{ $contrato->fecha_fin }}</td>
-                                <td>{{ $contrato->ejecutivo_id }}</td>
+                                <td>{{ $contrato->nombre }} {{ $contrato->apellido }}</td>
                                 <td>
-                                    @if ($contrato->estado == 1)
+                                    @if ($contrato->estado_contrato == "Activo")
                                     <span class="badge bg-success">Activo</span>
                                     @else
                                     <span class="badge bg-danger">Inactivo</span>
@@ -62,7 +62,7 @@
                                         data-organizacion_id="{{ $contrato->organizacion_id }}"
                                         data-fecha_inicio="{{ $contrato->fecha_inicio }}"
                                         data-fecha_fin="{{ $contrato->fecha_fin }}"
-                                        data-estado="{{ $contrato->estado }}" data-target="#modalEditarcontrato"><i
+                                        data-estado="{{ $contrato->estado_contrato }}" data-target="#modalEditarcontrato"><i
                                             class="fas fa-edit"></i></button>
                                     <button class="btn btn-danger btn-sm btnEliminarcontrato"
                                         idcontrato="{{ $contrato->id }}" ruta="{{ URL::to('contrato') }}"><i
@@ -110,6 +110,8 @@
 
 @push('page_scripts')
 <script src="{{ asset('js/plantilla.js') }}"></script>
+<script src="{{ asset('js/contrato.js') }}"></script>
+
 @endpush
 @if (Session::has('toast_success'))
 <script>

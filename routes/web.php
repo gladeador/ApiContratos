@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+/* Aquí te lleva a servicios */
+Route::get('/contrato/servicios', function () {
+    return redirect('/servicios');
+});
+/* Aquí te lleva a servicios */
+Route::get('/contrato/contratos', function () {
+    return redirect('/contratos');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -46,12 +54,14 @@ Route::resource('ejecutivos', 'App\Http\Controllers\EjecutivosController')->midd
 /*Contratos*/
 Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->middleware('auth');
 Route::resource('contratos', 'App\Http\Controllers\ContratoController')->middleware('auth');
-Route::get('/contrato', 'App\Http\Controllers\ContratoController@contrato')->middleware('auth');
-
+Route::get('/contrato/{organizacion_id}', 'App\Http\Controllers\ContratoController@contrato')->middleware('auth');
+Route::get('/servicio/{contrato_id}/{organizacion_id}', 'App\Http\Controllers\ServicioController@servicio')->name('servicio')->middleware('auth');
+Route::get('/contratoredireccion/{contrato_id}', 'App\Http\Controllers\ContratoController@contratoredireccion')->middleware('auth');
 
 /*Servicios*/
 Route::get('/servicios', [App\Http\Controllers\ServicioController::class, 'index'])->middleware('auth');
-Route::resource('servicios', 'App\Http\Controllers\ServicioController')->middleware('auth');
+Route::resource('/servicios', 'App\Http\Controllers\ServicioController')->middleware('auth');
+Route::get('/servicio', 'App\Http\Controllers\ServicioController@servicio')->middleware('auth');
 
 /* LDAP */
 Route::get('/ldap', [LdapController::class, 'index'])->name('ldap.index')->middleware('auth');

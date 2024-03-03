@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use PhpOption\Option;
 
 class ApiController extends Controller
 {
@@ -26,8 +27,8 @@ class ApiController extends Controller
             ])->timeout(30)->get('https://valuedesk2.valuetech.cl/api/v1/organizations');
 
             return $response->json();
-            
-        } catch (\Exception $e) {   
+
+        } catch (\Exception $e) {
             // Si se produce un error de tiempo de espera (timeout)
             if ($e->getCode() === CURLE_OPERATION_TIMEOUTED) {
                 return redirect()->route('home')->with('toast_error', 'La solicitud ha excedido el tiempo límite.');
@@ -40,13 +41,22 @@ class ApiController extends Controller
 
 
     // Método para obtener datos de la API 2 utilizando el token de autenticación
-    public function fetchDataFromApi2()
+    public function fetchDataServicioSelectTree()
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
-        ])->get('https://api2.example.com/data');
+        ])->get('https://valuedesk2.valuetech.cl/api/v1/object_manager_attributes');
 
-        return $response->json();
+        // Decodificar la respuesta JSON
+        $data = $response->json();
+
+        // Filtrar los resultados para mostrar solo aquellos con type = 'tree_select'
+        $filteredResults = array_filter($data, function ($item) {
+            return isset($item['name']) && $item['name'] === 'idservicio';
+        });
+
+            // Retornar los resultados filtrados
+        return $filteredResults;
     }
 
 }

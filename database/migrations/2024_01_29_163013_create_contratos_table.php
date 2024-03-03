@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->increments('id');
 
             // Identificador de la organización relacionada
-            $table->unsignedBigInteger('organizacion_id');
+            $table->unsignedBigInteger('organizacion_id')->unique();
 
             // Aqquí se indica si se lleva por contrato o por servicio
             $table->boolean('contrato_o_servicio')->default(false);
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->text('descripcion')->nullable();
 
             // Tipo de Contrato (mensuales, anuales, temporales)
-            $table->enum('tipo_horas', ['mensuales', 'anuales', 'spot']);
+            $table->enum('tipo_contrato', ['mensuales', 'anuales', 'spot']);
 
             // Horas del contrato que se dividira en todos los servicios(inicializado a 0)
             $table->decimal('horas_contrato', 12, 2)->default(0);

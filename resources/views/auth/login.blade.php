@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
         crossorigin="anonymous" />
-
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+@include('layouts.css')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!--Mi Estilo particulas-->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
@@ -104,7 +104,7 @@
 
     <!--js Particles-->
     <script src="{{ asset('js/particles.min.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/apparticles.js') }}"></script>
 
 </body>
 

@@ -10,10 +10,8 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "admin-lte": "^3.1",
         "axios": "^1.6.5",
         "blade-formatter": "^1.23.2",
-        "bootstrap": "^4.6.0",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.43",
         "lodash": "^4.17.19",
@@ -21,21 +19,16 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.32.11",
-        "sass-loader": "^11.0.1",
-        "vue": "^2.7.14",
+        "sass-loader": "^12.1.0",
         "vue-loader": "^17.4.2",
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "datatables.net": "^1.11.5",
+        "admin-lte": "3.2",
         "datatables.net-autofill": "^2.3.9",
         "datatables.net-autofill-dt": "^2.3.9",
-        "datatables.net-bs4": "^3.2.2",
-        "datatables.net-buttons": "^1.7.1",
-        "datatables.net-buttons-dt": "^1.7.1",
-        "datatables.net-dt": "^1.1.0",
         "jshint": "^2.13.4",
-        "sweetalert2": "^11.6.13",
+        "sweetalert2": "^11.10.5",
         "vue-socket.io": "^3.0.10"
     }
 }

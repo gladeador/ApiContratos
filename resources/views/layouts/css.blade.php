@@ -35,15 +35,12 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
-<!--Sweet Alert 2-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
-
 <!-- Enlace a CKEditor CDN -->
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 <!-- Enlace para button switch -->
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
   rel="stylesheet">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
@@ -51,4 +48,4 @@
 <link rel='stylesheet' href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel='stylesheet' href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel='stylesheet' href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-<link rel='stylesheet' href="{{ asset('dist/css/adminlte.min.css?v=3.2.0') }}">
+<link rel='stylesheet' href="{{ asset('dist/css/adminlte.min.css?v=3.2.0') }}"> 

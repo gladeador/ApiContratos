@@ -23,28 +23,59 @@ class AjaxController extends Controller
         if ($request->tipo == "verificaEmail") {
             if (DB::table('users')->where('email', $request->email)->exists()) {
                 return response()->json([
-                            'message' => "success"
-                        ]);
+                    'message' => "success"
+                ]);
             } else {
                 return response()->json([
-                            'message' => "error"
-                        ]);
+                    'message' => "error"
+                ]);
             }
         }
 
-        if ($request->tipo =="verificaRut") {
+        if ($request->tipo == "verificaRut") {
             $cadena = $request->rut;
             $cadena = str_replace("-", "", $cadena);
             if (DB::table('users')->where('num_documento', $cadena)->exists()) {
                 return response()->json([
-                            'message' => "success"
-                        ]);
+                    'message' => "success"
+                ]);
             } else {
                 return response()->json([
-                            'message' => "error"
-                        ]);
+                    'message' => "error"
+                ]);
             }
         }
+        if ($request->tipo == "organizacion") {
+            $organizacion_id = $request->organizacion_id;
+            if (DB::table('contratos')->where('organizacion_id', $organizacion_id)->exists()) {
+                return response()->json([
+                    'message' => "success"
+                ]);
+            } else {
+                return response()->json([
+                    'message' => "error"
+                ]);
+            }
+        }
+        if ($request->tipo == "verifica_contrato") {
+            $organizacion_id = $request->organizacion_id;
+            $contrato_id = DB::table('contratos')->where('organizacion_id', $organizacion_id)->value('id');
+
+            if ($contrato_id == null) {
+                return response()->json([
+                    'message' => "error"
+                ]);
+            } else {
+                return response()->json([
+                    'message' => "success",
+                    'contrato_id' => $contrato_id
+                ]);
+            }
+
+
+
+        }
+
     }
 
     /**
