@@ -19,7 +19,6 @@ class Contrato extends Model
         'tipo_horas',
         'descripcion',
         'horas_contrato',
-        'horas_adicionales',
         'horas_ocupadas',
         'contrato_texto',
         'pdf_path',

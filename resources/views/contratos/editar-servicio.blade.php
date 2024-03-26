@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@php
-$contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
-@endphp
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -21,7 +18,9 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('servicios.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('servicios.update', $services->id)}}" method="POST"
+                            enctype="multipart/form-data">
+                            @method('patch')
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -30,14 +29,19 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
                                         <select class="form-control" name="idservicio" id="idservicio">
                                             <option value="">Selecciona un servicio</option>
                                             @foreach($servicios[9]['data_option']['options'] as $option)
-                                            <option value="{{ $option['value'] }}">{{ $option['name'] }}</option>
+                                            <option value="{{ $option['value'] }}"
+                                                {{$services->servicio_tree_select == $option['value'] ? 'selected' : ''}}>
+                                                {{ $option['name'] }}</option>
                                             @if(isset($option['children']))
                                             @foreach($option['children'] as $child)
-                                            <option value="{{ $child['value'] }}">-- {{ $child['name'] }}</option>
+                                            <option value="{{ $child['value'] }}"
+                                                {{$services->servicio_tree_select == $child['value'] ? 'selected' : '' }}>
+                                                -- {{ $child['name'] }}</option>
                                             @endforeach
                                             @endif
                                             @endforeach
                                         </select>
+
                                     </div>
                                 </div>
 
@@ -46,19 +50,26 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
                             <!-- Aqui hacemos un div para continuar formulario del servicio en caso de ser true -->
                             <div id="servicio">
                                 <div class="row">
+                                    @php
+                                    $contrato = DB::table('contratos')->where('id',
+                                    $services->contrato_id)->get()->first();
+                                    @endphp
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="fecha_inicio">Fecha Inicio</label>
                                             <input type="date" class="form-control" id="fecha_inicio"
-                                                name="fecha_inicio" tabindex="4" {{$contrato_db->contrato_o_servicio == true ? 'disabled' : ''}} required>
+                                                name="fecha_inicio" tabindex="4" value="{{$services->fecha_inicio}}"
+                                                @if($contrato->contrato_o_servicio == true) disabled @endif>
                                         </div>
 
                                     </div>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="fecha_fin">Fecha Termino</label>
+                                            <label for="fecha_fin">Fecha Termino </label>
                                             <input type="date" class="form-control" id="fecha_fin" name="fecha_fin"
-                                                tabindex="5" {{$contrato_db->contrato_o_servicio == true ? 'disabled' : ''}} required>
+                                                tabindex="5" value="{{$services->fecha_fin}}"
+                                                @if($contrato->contrato_o_servicio == true) disabled @endif>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -67,9 +78,15 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
                                             <select class="form-control" id="tiposervicio" name="tiposervicio"
                                                 tabindex="7" required>
                                                 <option value="">Selecciona un tipo servicio</option>
-                                                <option value="mensual">Mensual</option>
-                                                <option value="anual">Anual</option>
-                                                <option value="spot">Spot</option>
+                                                <option value="mensual"
+                                                    {{$services->tipo_servicio == "mensual" ? 'selected' : ''}}>Mensual
+                                                </option>
+                                                <option value="anual"
+                                                    {{$services->tipo_servicio == "anual" ? 'selected' : ''}}>Anual
+                                                </option>
+                                                <option value="spot"
+                                                    {{$services->tipo_servicio == "spot" ? 'selected' : ''}}>Spot
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -77,24 +94,26 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
                                         <div class="form-group">
                                             <label for="horasservicio">Horas Servicio</label>
                                             <input type="decimal" class="form-control" id="horasservicio"
-                                                name="horasservicio" tabindex="8" required>
+                                                name="horasservicio" tabindex="8" value="{{$services->horas_servicio}}"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="pdf_servicio">Subir Contrato PDF</label>
                                             <input type="file" class="form-control" id="pdf_servicio"
-                                                accept="application/pdf" name="pdf_servicio" tabindex="10" required>
+                                                accept="application/pdf" name="pdf_servicio" tabindex="10">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="horasadicionales">Renovación Automática</label>
                                             <br>
-                                            <input type="checkbox" class="form-control" data-toggle="toggle"
+                                            <input type="checkbox" class="form-control" checked data-toggle="toggle"
                                                 data-on="SI" data-size="sm" id="renovacionautomatica"
                                                 name="renovacionautomatica" data-off="NO" data-onstyle="success"
-                                                data-offstyle="danger" tabindex="11">
+                                                data-offstyle="danger" value="{{$services->renovacion_automatica}}"
+                                                tabindex="11">
                                         </div>
                                     </div>
 
@@ -103,16 +122,16 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
                                             <label for="organizacion_id">Texto Contrato</label>
                                             <textarea class="form-control" id="textoservicio" rows="3"
                                                 placeholder="Ingrese sus observaciones" name="textoservicio"
-                                                tabindex="13" required></textarea>
+                                                tabindex="13" required>{{$services->servicio_texto}}</textarea>
 
                                         </div>
                                     </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary botongurdarservicio">Enviar</button>
-                                <button type="reset" class="btn btn-danger" onclick="window.location.href='/contratoss'">Cancelar</button>
-                                <input type="hidden" name="contrato_id" id="contrato_id" value="{{$contrato_id}}">
-                                <input type="hidden" name="organizacion_id" id="organizacion_id" value="{{$organizacion_id}}">
+                                <button type="reset" class="btn btn-danger"
+                                    onclick="window.location.href='/contratoss'">Cancelar</button>
+                                <input type="hidden" name="contrato_id" id="contrato_id" value="{{$services->contrato_id}}">
                             </div>
                         </form>
                     </div>
@@ -122,7 +141,7 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
     </div><!-- /.container-fluid -->
 </section>
 <script>
-    CKEDITOR.replace('textoservicio');
+CKEDITOR.replace('textoservicio');
 </script>
 @push('page_scripts')
 <script src="{{ asset('js/servicio.js') }}"></script>
@@ -130,23 +149,25 @@ $contrato_db = DB::table('contratos')->where('id', $contrato_id)->first();
 <!-- alert sweetalert -->
 @if (Session::has('toast_success'))
 <script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '{{ Session::get('toast_success') }}',
-        showConfirmButton: false,
-        timer: 1500
-    })
+Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: '{{ Session::get('
+    toast_success ') }}',
+    showConfirmButton: false,
+    timer: 1500
+})
 </script>
 @endif
 @if (Session::has('toast_error'))
 <script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: '{{ Session::get('toast_error') }}',
-        showConfirmButton: timer: 1500
-    })
+Swal.fire({
+    position: 'top-end',
+    icon: 'error',
+    title: '{{ Session::get('
+    toast_error ') }}',
+    showConfirmButton: timer: 1500
+})
 </script>
 @endif
 @endsection

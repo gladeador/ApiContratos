@@ -33,9 +33,6 @@ return new class extends Migration {
             // Horas del contrato que se dividira en todos los servicios(inicializado a 0)
             $table->decimal('horas_contrato', 12, 2)->default(0);
 
-            // Horas adicionales del contrato que se dividira en todos los servicios(inicializado a 0)
-            $table->decimal('horas_adicionales', 12, 2)->default(0);
-
             // Indica las horas ocupadas del contrato
             $table->decimal('horas_ocupadas', 12, 2)->default(0);
 

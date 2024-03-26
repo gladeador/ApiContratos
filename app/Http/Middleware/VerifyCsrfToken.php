@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        '/webhook/zammad',
     ];
 
     protected $redirectTo = '/login';

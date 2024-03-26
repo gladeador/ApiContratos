@@ -25,17 +25,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="organizacion_id">Organización</label>
-                                    @php
-                                    $organizacion_id = $organizacion_id->first()->organizacion_id;
-                                    @endphp
-                                    <select class="form-control verificarorganizacion" id="organizacion_id"
-                                        name="organizacion_id" required>
+                                    <select class="form-control verificarorganizacion" id="organizacion_id_get"
+                                        name="organizacion_id_get" required>
                                         <option value="">Selecciona una organización</option>
                                         @foreach ($organizaciones as $organizacion)
-                                        <option value="{{ $organizacion['id'] }}"
-                                            {{ $organizacion_id == $organizacion['id'] ? 'selected' : '' }}>
-                                            {{ $organizacion['name'] }}
-                                        </option>
+                                        <option value="{{ $organizacion['id'] }}" {{
+        $organizacion_id == $organizacion['id'] ? 'selected' : '' }}>{{
+        $organizacion['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -52,9 +48,7 @@
             <div class="box-header with-border">
                 <a href="{{ url('/servicio', ['contrato_id' => $contrato_id, 'organizacion_id' => $organizacion_id]) }}"
                     class="btn btn-primary agregaservicio">Agregar servicio</a>
-                <button type="reset" class="btn btn-info" onclick="window.location.href='/contratoss'">Volver a
-                    Contratos</button>
-
+                    <button type="reset" class="btn btn-info" onclick="window.location.href='/contratoss'">Volver a Contratos</button>
             </div>
         </div>
         <div class="card-body">
@@ -86,16 +80,16 @@
                             @endif
                         </td>
                         <td>
-                            <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                        <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
                                 title="Agregar Horas Adicionales  ">
-                                <a href="#" data-toggle="modal" data-target="#InsertaHoraAdicional"
+                                <a href="#" data-toggle="modal" data-target="#InsertaHoraAdicionalServicio"
                                     data-idservicio="{{$servicio->id}}">
                                     <i class="fas fa-clock icons-clock"></i>
                                 </a>
                             </button>
                             <button class="btn btn-sm btnEditarServicio" data-id="{{ $servicio->id }}">
                                 <a href="{{ route('contrato.editar.servicio', $servicio->id) }}">
-                                    <i class="fas fa-edit edit-icon"></i>
+                                <i class="fas fa-edit edit-icon"></i>
                                 </a>
                             </button>
                             <button class="btn btn-sm btnEliminarServicio" idservicio="{{$servicio->id}}"
@@ -121,11 +115,11 @@
         </div>
 </section>
 
-<div class="modal fade" id="InsertaHoraAdicional">
+<div class="modal fade" id="InsertaHoraAdicionalServicio">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Agregar Horas Adcionales Servicios</h4>
+                <h4 class="modal-title">Agregar Horas Adcionales Servicios </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -163,8 +157,7 @@
     <!-- /.modal-dialog -->
 </div>
 
-
-@if (isset ($toast_success))
+@if (isset($toast_success))
 <script>
 Swal.fire({
     position: 'top-end',
@@ -175,7 +168,7 @@ Swal.fire({
 })
 </script>
 @endif
-@if (isset ($toast_error))
+@if (isset($toast_error))
 <script>
 Swal.fire({
     position: 'top-end',

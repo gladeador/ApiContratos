@@ -52,15 +52,8 @@ class SubmenuSeeder extends Seeder
                 [
                     'menu_id' => 2,
                     'descripcion' => 'Contratos',
-                    'ruta' => 'contratos',   
+                    'ruta' => 'contratoss',   
                     'orden' => 1,
-                    'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
-                ],
-                [
-                    'menu_id' => 2,
-                    'descripcion' => 'Servicios',
-                    'ruta' => 'servicios',   
-                    'orden' => 2,
                     'icono' => 'nav-icon fas fa-sharp fa-light fa-circle',
                 ],
                 [

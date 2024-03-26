@@ -18,15 +18,14 @@ return new class extends Migration {
             $table->string('servicio_tree_select')->nullable();
 
             // Fecha de inicio y fin del contrato
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
 
             // Tipo de horas a consumir (mensuales, anuales, temporales)
             $table->enum('tipo_servicio', ['mensual', 'anual', 'spot']);
 
             // Horas del servicio y horas adicionales (inicializado a 0)
             $table->decimal('horas_servicio', 12, 2);
-            $table->decimal('horas_adicionales', 12, 2)->default(0);
 
             // Indica las horas ocupadas del servicio
             $table->decimal('horas_ocupadas', 12, 2)->default(0);

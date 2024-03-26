@@ -1,0 +1,520 @@
+{
+  "ticket": {
+    "article_count": 3,
+    "article_ids": [
+      83,
+      84,
+      85
+    ],
+    "close_at": null,
+    "close_diff_in_min": null,
+    "close_escalation_at": null,
+    "close_in_min": null,
+    "create_article_sender": "Customer",
+    "create_article_sender_id": 2,
+    "create_article_type": "phone",
+    "create_article_type_id": 5,
+    "created_at": "2024-03-18 14:05:48 UTC",
+    "created_by": {
+      "active": true,
+      "address": null,
+      "city": "",
+      "country": "",
+      "created_at": "2024-01-04 20:21:42 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": null,
+      "email": "eguzman@valuetech.cl",
+      "fax": "",
+      "firstname": "Enrique",
+      "id": 3,
+      "image": null,
+      "image_source": null,
+      "lastname": "Guzmán",
+      "login": "eguzman@valuetech.cl",
+      "mobile": "",
+      "note": "",
+      "organization_id": null,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        1,
+        2
+      ],
+      "roles": [
+        "Admin",
+        "Agent"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 12:50:21 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "created_by_id": 3,
+    "customer": {
+      "active": true,
+      "address": "",
+      "city": "",
+      "country": "",
+      "created_at": "2023-12-13 17:11:33 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": "",
+      "email": "nicole.braun@zammad.org",
+      "fax": "",
+      "firstname": "Nicole",
+      "id": 2,
+      "image": null,
+      "image_source": null,
+      "lastname": "Braun",
+      "login": "nicole.braun@zammad.org",
+      "mobile": "",
+      "note": "",
+      "organization": "Zammad Foundation",
+      "organization_id": 1,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        3
+      ],
+      "roles": [
+        "Customer"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 14:05:50 UTC",
+      "updated_by": "eguzman@valuetech.cl",
+      "updated_by_id": 3,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "customer_id": 2,
+    "escalation_at": null,
+    "first_response_at": null,
+    "first_response_diff_in_min": null,
+    "first_response_escalation_at": null,
+    "first_response_in_min": null,
+    "group": {
+      "active": true,
+      "assignment_timeout": null,
+      "created_at": "2023-12-13 17:11:31 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "email_address_id": null,
+      "follow_up_assignment": true,
+      "follow_up_possible": "yes",
+      "id": 1,
+      "name": "Users",
+      "name_last": "Users",
+      "note": "Standard Group/Pool for Tickets.",
+      "parent_id": null,
+      "reopen_time_in_days": null,
+      "shared_drafts": true,
+      "signature": "default",
+      "signature_id": 1,
+      "updated_at": "2024-01-04 20:21:42 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "user_ids": [
+        3
+      ],
+      "users": [
+        "eguzman@valuetech.cl"
+      ]
+    },
+    "group_id": 1,
+    "id": 5,
+    "last_close_at": null,
+    "last_contact_agent_at": null,
+    "last_contact_at": "2024-03-18 14:05:48 UTC",
+    "last_contact_customer_at": "2024-03-18 14:05:48 UTC",
+    "last_owner_update_at": null,
+    "note": null,
+    "number": "92004",
+    "organization": {
+      "active": true,
+      "created_at": "2023-12-13 17:11:32 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "domain": "",
+      "domain_assignment": false,
+      "id": 1,
+      "member_ids": [
+        2
+      ],
+      "members": [
+        "nicole.braun@zammad.org"
+      ],
+      "name": "Zammad Foundation",
+      "note": "",
+      "secondary_member_ids": [
+
+      ],
+      "shared": true,
+      "updated_at": "2024-03-18 14:05:48 UTC",
+      "updated_by": "eguzman@valuetech.cl",
+      "updated_by_id": 3,
+      "vip": false
+    },
+    "organization_id": 1,
+    "owner": {
+      "active": true,
+      "address": null,
+      "city": "",
+      "country": "",
+      "created_at": "2024-01-04 20:21:42 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": null,
+      "email": "eguzman@valuetech.cl",
+      "fax": "",
+      "firstname": "Enrique",
+      "id": 3,
+      "image": null,
+      "image_source": null,
+      "lastname": "Guzmán",
+      "login": "eguzman@valuetech.cl",
+      "mobile": "",
+      "note": "",
+      "organization_id": null,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        1,
+        2
+      ],
+      "roles": [
+        "Admin",
+        "Agent"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 12:50:21 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "owner_id": 3,
+    "pending_time": null,
+    "preferences": {
+    },
+    "priority": {
+      "active": true,
+      "created_at": "2023-12-13 17:11:32 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "default_create": true,
+      "id": 2,
+      "name": "2 normal",
+      "note": null,
+      "ui_color": null,
+      "ui_icon": null,
+      "updated_at": "2023-12-13 17:11:32 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1
+    },
+    "priority_id": 2,
+    "servicio": "Soporte Remoto::Docuware Cloud",
+    "state": "open",
+    "state_id": 2,
+    "ticket_time_accounting_ids": [
+      80
+    ],
+    "time_unit": "12.0",
+    "title": "prueba numero 1",
+    "type": null,
+    "update_diff_in_min": null,
+    "update_escalation_at": null,
+    "update_in_min": null,
+    "updated_at": "2024-03-18 14:24:11 UTC",
+    "updated_by": {
+      "active": true,
+      "address": null,
+      "city": "",
+      "country": "",
+      "created_at": "2024-01-04 20:21:42 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": null,
+      "email": "eguzman@valuetech.cl",
+      "fax": "",
+      "firstname": "Enrique",
+      "id": 3,
+      "image": null,
+      "image_source": null,
+      "lastname": "Guzmán",
+      "login": "eguzman@valuetech.cl",
+      "mobile": "",
+      "note": "",
+      "organization_id": null,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        1,
+        2
+      ],
+      "roles": [
+        "Admin",
+        "Agent"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 12:50:21 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "updated_by_id": 3
+  },
+  "article": {
+    "attachments": [
+
+    ],
+    "body": "dwdwdw",
+    "cc": "",
+    "content_type": "text/html",
+    "created_at": "2024-03-18 14:24:10 UTC",
+    "created_by": {
+      "active": true,
+      "address": null,
+      "city": "",
+      "country": "",
+      "created_at": "2024-01-04 20:21:42 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": null,
+      "email": "eguzman@valuetech.cl",
+      "fax": "",
+      "firstname": "Enrique",
+      "id": 3,
+      "image": null,
+      "image_source": null,
+      "lastname": "Guzmán",
+      "login": "eguzman@valuetech.cl",
+      "mobile": "",
+      "note": "",
+      "organization_id": null,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        1,
+        2
+      ],
+      "roles": [
+        "Admin",
+        "Agent"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 12:50:21 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "created_by_id": 3,
+    "from": "Enrique Guzmán",
+    "id": 85,
+    "in_reply_to": "",
+    "internal": true,
+    "message_id": null,
+    "message_id_md5": null,
+    "origin_by_id": null,
+    "preferences": {
+    },
+    "references": null,
+    "reply_to": null,
+    "sender": "Agent",
+    "sender_id": 1,
+    "subject": "",
+    "ticket_id": 5,
+    "time_unit": "12.0",
+    "to": "",
+    "type": "note",
+    "type_id": 10,
+    "updated_at": "2024-03-18 14:24:10 UTC",
+    "updated_by": {
+      "active": true,
+      "address": null,
+      "city": "",
+      "country": "",
+      "created_at": "2024-01-04 20:21:42 UTC",
+      "created_by": "-",
+      "created_by_id": 1,
+      "department": null,
+      "email": "eguzman@valuetech.cl",
+      "fax": "",
+      "firstname": "Enrique",
+      "id": 3,
+      "image": null,
+      "image_source": null,
+      "lastname": "Guzmán",
+      "login": "eguzman@valuetech.cl",
+      "mobile": "",
+      "note": "",
+      "organization_id": null,
+      "organization_ids": [
+
+      ],
+      "organizations": [
+
+      ],
+      "out_of_office": false,
+      "out_of_office_end_at": null,
+      "out_of_office_replacement_id": null,
+      "out_of_office_start_at": null,
+      "overview_sorting_ids": [
+
+      ],
+      "overview_sortings": [
+
+      ],
+      "phone": "",
+      "role_ids": [
+        1,
+        2
+      ],
+      "roles": [
+        "Admin",
+        "Agent"
+      ],
+      "source": null,
+      "street": "",
+      "two_factor_preference_ids": [
+
+      ],
+      "two_factor_preferences": [
+
+      ],
+      "updated_at": "2024-03-18 12:50:21 UTC",
+      "updated_by": "-",
+      "updated_by_id": 1,
+      "verified": false,
+      "vip": false,
+      "web": "",
+      "zip": ""
+    },
+    "updated_by_id": 3,
+    "accounted_time": 12.0
+  }
+}

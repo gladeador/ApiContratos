@@ -1,7 +1,8 @@
 version: '3.8'
+
 services:
-  main:
-    container_name: Serve
+  app:
+    container_name: laravel-app
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,58 +10,43 @@ services:
     volumes:
       - .:/app
     ports:
-      - 8000:8000
+      - 8080:8080
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      # Agregar otras variables de entorno según sea necesario
 
   queue:
-    container_name: Queue
+    container_name: laravel-queue
     build:
       context: .
       dockerfile: Dockerfile
-    command: 'php artisan queue:work'
+    command: 'php artisan queue:work --queue=default'
     depends_on:
       - db
 
   db:
-    platform: linux/x86_64
-    image: mysql:8.0
-    container_name: Database
+    image: postgres:13
+    container_name: laravel-db
     environment:
-      MYSQL_DATABASE: "${DB_DATABASE}"
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_ROOT: "root"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: laravel
+      POSTGRES_USER: laravel_user
+      POSTGRES_PASSWORD: laravel_password
+    ports:
+      - "5432:5432"
     volumes:
-      - db:/var/lib/mysql
-    ports:
-      - 3306:3306
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: PhpMyAdmin
-    links:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - 8081:80
+      - db-data:/var/lib/postgresql/data
 
   mailpit:
     image: axllent/mailpit
-    container_name: MailPit
+    container_name: mailpit
     ports:
       - "1025:1025"
       - "8025:8025"
-    networks:
-      - laravel-exa
 
 networks:
   laravel-exa:
     driver: bridge
 
 volumes:
-  db:
-    driver: local
+  db-data:

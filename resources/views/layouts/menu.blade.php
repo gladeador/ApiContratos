@@ -50,7 +50,7 @@ $menus = DB::table('permisos')
         <ul class="nav nav-treeview">
             @foreach ($submenu as $item2)
                 <li class="nav-item">
-                    <a href="{{ $item2->ruta }}" idRutaSubMenu="{{ $item2->ruta }}" id="SubMenu"
+                    <a href="{{ url($item2->ruta) }}" idRutaSubMenu="{{ $item2->ruta }}" id="SubMenu"
                         class="nav-link {{ !Route::is($item2->ruta . '.index') ?: 'active' }} subMenuClass"
                         onclick="activeMenu($item->ruta)">
                         <i class="{{ $item2->icono }}"></i>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LdapController;
+use App\Http\Controllers\TeEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,18 @@ Route::get('/', function () {
 Route::get('/contrato/servicios', function () {
     return redirect('/servicios');
 });
-/* Aquí te lleva a servicios */
+/* Aquí te lleva a contratos */
 Route::get('/contrato/contratos', function () {
     return redirect('/contratos');
 });
+
+Route::get('/webhook', function () {
+    return view('webhook');
+});
+
 Auth::routes();
+
+Route::get('/test' ,[App\Http\Controllers\TeEventController::class , 'testingEvents']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -52,16 +60,26 @@ Route::get('/ejecutivos', [App\Http\Controllers\EjecutivosController::class, 'in
 Route::resource('ejecutivos', 'App\Http\Controllers\EjecutivosController')->middleware('auth');
 
 /*Contratos*/
-Route::get('/contratos', [App\Http\Controllers\ContratoController::class, 'index'])->middleware('auth');
-Route::resource('contratos', 'App\Http\Controllers\ContratoController')->middleware('auth');
+//Route::get('/contratoss', 'App\Http\Controllers\ContratoController@index')->middleware('auth');
+Route::resource('contratoss', 'App\Http\Controllers\ContratoController')->middleware('auth');
 Route::get('/contrato/{organizacion_id}', 'App\Http\Controllers\ContratoController@contrato')->middleware('auth');
 Route::get('/servicio/{contrato_id}/{organizacion_id}', 'App\Http\Controllers\ServicioController@servicio')->name('servicio')->middleware('auth');
-Route::get('/contratoredireccion/{contrato_id}', 'App\Http\Controllers\ContratoController@contratoredireccion')->middleware('auth');
+Route::get('/contratoredireccion/{contrato_id}/{organizacion_id}', 'App\Http\Controllers\ContratoController@contratoredireccion')->middleware('auth');
+Route::get('/contratoredireccionDos/{contrato_id}/{organizacion_id}', 'App\Http\Controllers\ContratoController@contratoredireccionDos')->middleware('auth');
+Route::get('editaContrato/{id}', 'App\Http\Controllers\ContratoController@showForm')->name('contrato.editar.formulario')->middleware('auth');
+Route::get('/show/{contrato_id}/{organizacion_id}', 'App\Http\Controllers\ContratoController@show')->middleware('auth');
 
 /*Servicios*/
-Route::get('/servicios', [App\Http\Controllers\ServicioController::class, 'index'])->middleware('auth');
+///Route::get('/servicios', [App\Http\Controllers\ServicioController::class, 'index'])->middleware('auth');
 Route::resource('/servicios', 'App\Http\Controllers\ServicioController')->middleware('auth');
 Route::get('/servicio', 'App\Http\Controllers\ServicioController@servicio')->middleware('auth');
+Route::get('editaSerivico/{id}', 'App\Http\Controllers\ServicioController@showForm')->name('contrato.editar.servicio')->middleware('auth');
+    
+/* Horas Adicionales Contratos */
+Route::resource('/horasadicionelescontrato', 'App\Http\Controllers\HorasAdicionalesContratoController')->middleware('auth');
+
+/* Horas Adicionales Servicios */
+Route::resource('/horasadicionelesservicio', 'App\Http\Controllers\HorasAdicionalesServiciosController')->middleware('auth');
 
 /* LDAP */
 Route::get('/ldap', [LdapController::class, 'index'])->name('ldap.index')->middleware('auth');
@@ -70,7 +88,11 @@ Route::get('/ldap/transfer', [LdapController::class, 'transferView'])->name('lda
 Route::post('/ldap/transfer/users', [LdapController::class, 'transferUsers'])->name('ldap.transfer.users')->middleware('auth');
 
 /*Peticiones Ajax*/
-Route::post('/ajax', [App\Http\Controllers\AjaxController::class, 'index'])->name('ajax');
+Route::post('/ajax', [App\Http\Controllers\AjaxController::class, 'index'])->name('ajax')->middleware('auth');
+Route::get('/ajax', [App\Http\Controllers\AjaxController::class, 'index'])->name('ajax')->middleware('auth');
 //Route::post('ajax', 'App\Http\Controllers\AjaxController');
 
-// routes/web.php
+/* App Webhook */
+Route::post('/webhook/zammad', 'App\Http\Controllers\ZammadWebhookController@handle');
+
+

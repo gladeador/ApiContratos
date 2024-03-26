@@ -57,3 +57,20 @@
     z-index: 99;
     opacity: 0.9
 }
+
+/* Css propio */
+.trash-icon {
+    color: red; /* Cambia el color a rojo */
+}
+.edit-icon {
+    color: orange; /* Cambia el color a rojo */
+}
+.icon-plus {
+    color: green; /* Cambia el color a rojo */
+}
+.icons-tools {
+    color: olive; /* Cambia el color a rojo */
+}
+.icons-clock {
+    color: black; /* Cambia el color a rojo */
+}

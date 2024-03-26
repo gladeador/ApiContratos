@@ -32,7 +32,7 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 RUN npm install -g npm@latest
 
 # Expose port 8000 for Laravel development server
-EXPOSE 8000
+EXPOSE 8080
 
 # Start Laravel development server
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan serve --host=0.0.0.0 --port=8080

@@ -111,3 +111,4 @@ $("#tipo_documentoEdita").change(function () {
         $('#rut').attr('required', false);
     };
 });
+

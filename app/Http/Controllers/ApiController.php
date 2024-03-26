@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use PhpOption\Option;
 
 class ApiController extends Controller
@@ -52,10 +54,10 @@ class ApiController extends Controller
 
         // Filtrar los resultados para mostrar solo aquellos con type = 'tree_select'
         $filteredResults = array_filter($data, function ($item) {
-            return isset($item['name']) && $item['name'] === 'idservicio';
+            return isset ($item['name']) && $item['name'] === 'idservicio';
         });
 
-            // Retornar los resultados filtrados
+        // Retornar los resultados filtrados
         return $filteredResults;
     }
 

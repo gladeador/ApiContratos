@@ -16,7 +16,6 @@ class Servicio extends Model
         'fecha_fin',
         'tipo_horas',
         'horas_servicio',
-        'horas_adicionales',
         'horas_ocupadas',
         'contrato_texto',
         'pdf_path',

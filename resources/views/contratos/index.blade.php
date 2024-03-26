@@ -57,16 +57,49 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm  btnEditarPerfil" data-toggle="modal"
-                                        data-id_contrato="{{ $contrato->id }}"
-                                        data-organizacion_id="{{ $contrato->organizacion_id }}"
-                                        data-fecha_inicio="{{ $contrato->fecha_inicio }}"
-                                        data-fecha_fin="{{ $contrato->fecha_fin }}"
-                                        data-estado="{{ $contrato->estado_contrato }}" data-target="#modalEditarcontrato"><i
-                                            class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger btn-sm btnEliminarcontrato"
-                                        idcontrato="{{ $contrato->id }}" ruta="{{ URL::to('contrato') }}"><i
-                                            class="fas fa-trash"></i></button>
+                                    <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Pdf Contrato">
+                                        <a href="{{ asset('storage/contratos/' . $contrato->pdf_path) }}"
+                                            target="_blank">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Agregar Servicio">
+                                        <a href="/servicio/{{$contrato->id}}/{{$contrato->organizacion_id}}">
+                                            <i class="fas fa-plus icon-plus"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Agregar Horas Adicionales  ">
+                                        <a href="#" data-toggle="modal" data-target="#InsertaHoraAdicional"
+                                            data-idcontrato="{{$contrato->id}}">
+                                            <i class="fas fa-clock icons-clock"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Ver Servicios Asociados">
+                                        <a
+                                            href="/contratoredireccionDos/{{$contrato->id}}/{{$contrato->organizacion_id}}">
+                                            <i class="fas fa-tools icons-tools"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Ver Datos Contrato">
+                                        <a href="/show/{{$contrato->id}}/{{$contrato->organizacion_id}}">
+                                            <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btnEditarContrato" data-toggle="tooltip"
+                                        data-placement="top" title="Editar Contrato" data-id="{{ $contrato->id }}">
+                                        <a href="{{ route('contrato.editar.formulario', $contrato->id) }}">
+                                            <i class="fas fa-edit edit-icon"></i>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-sm btnEliminarcontrato" data-toggle="tooltip"
+                                        data-placement="top" title="Eliminar Contrato" idcontrato="{{ $contrato->id }}"
+                                        ruta="{{ URL::to('contratoss') }}">
+                                        <i class="fas fa-trash trash-icon"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -93,47 +126,98 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
-
-<!-- Modal Agregar Contacto -->
-<div class="modal fade" id="insertarcontrato" tabindex="-1" role="dialog" aria-labelledby="insertarcontratoLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="InsertaHoraAdicional">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('contratos.store') }}" method="POST">
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar Horas Adcionales</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('horasadicionelescontrato.store') }}" role="form" method="POST">
                 @csrf
-                @include('contratos.formContrato');
+                <div class="modal-body ">
+                    <div class="form-group">
+                        <label for="horasadicionales">Horas Adicionales</label>
+                        <input type="decimal" class="form-control" id="horasadicionales"
+                            placeholder="Ingrese Horas Adicionales" name="horasadicionales" required>
+                    </div>
+                    <div class="form-group
+                        <label for=" exampleInputEmail1">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" placeholder="Ingrese Fecha" name="fecha"
+                            required>
+                    </div>
+                    <div class="form-group
+                        <label for=" exampleInputEmail1">Observaciones</label>
+                        <input type="text" class="form-control" id="observaciones" placeholder="Ingrese observación"
+                            name="observaciones" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <input type="hidden" id="idcontrato" name="idcontrato" value="">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+
             </form>
         </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
-<!-- Fin Modal Agregar Contacto -->
+@if (isset($toast_success))
+<script>
+Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: '{{$toast_success }}',
+    showConfirmButton: false,
+    timer: 1500
+})
+</script>
+@endif
+@if (isset($toast_error))
+<script>
+Swal.fire({
+    position: 'top-end',
+    icon: 'error',
+    title: '{{$toast_success }}',
+    showConfirmButton: false,
+    timer: 1500
+})
+</script>
+@endif
 
 @push('page_scripts')
 <script src="{{ asset('js/plantilla.js') }}"></script>
 <script src="{{ asset('js/contrato.js') }}"></script>
 
+
 @endpush
 @if (Session::has('toast_success'))
 <script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '{{ Session::get('toast_success') }}',
-        showConfirmButton: false,
-        timer: 1500
-    })
+Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: '{{ Session::get('
+    toast_success ') }}',
+    showConfirmButton: false,
+    timer: 1500
+})
 </script>
 @endif
 @if (Session::has('toast_error'))
 <script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: '{{ Session::get('toast_error') }}',
-        showConfirmButton: false,
-        timer: 1500
-    })
+Swal.fire({
+    position: 'top-end',
+    icon: 'error',
+    title: '{{ Session::get('
+    toast_error ') }}',
+    showConfirmButton: false,
+    timer: 1500
+})
 </script>
 @endif
-
 @endsection

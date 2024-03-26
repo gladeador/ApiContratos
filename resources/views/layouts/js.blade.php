@@ -2,6 +2,7 @@
  <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
 <script src="{{ asset('js/app.js') }}"> </script>
+<script src="{{ asset('js/script.js') }}"> </script>
 
  <!-- Bootstrap 4 -->
  <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -34,7 +35,11 @@
 
  <script src="{{ asset('dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 
-
+ <script>
+       $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 
  <!-- AdminLTE for demo purposes -->
  <!--<script src = "{{ asset('dist/js/demo.js') }}"></script> -->

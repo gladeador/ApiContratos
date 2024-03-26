@@ -39,6 +39,23 @@ $(function () {
         "responsive": true,
     });
 });
+
+/* aquí es una función la cual llama a una imgen */
+function imgLoader(classOId, tiempo) {
+    setTimeout(function () {
+        $(classOId).html(
+            '<div class="loading"><center><img src="img/Loading3.gif" alt="loading" /><br/>Un momento, por favor...</center></div>'
+        );
+    }, tiempo);
+}
+
+$(function () {
+    $(".comp-aeronave").on("click", function (e) {
+        imgLoader(".content-wrapper");
+    });
+
+});
+
 /**************************************Eliminar Rol*********************************************************/
 $(document).on("click", ".btnEliminarprofile", function () {
     var id_profile = $(this).attr("idprofile");
@@ -396,6 +413,156 @@ $(document).on("click", ".btnEliminarEjecutivo", function () {
                     Swal.fire(
                         'ERROR!',
                         'El ejecutivo no pudo ser eliminado.',
+                        'error'
+                    )
+                }
+            })
+
+        }
+    })
+});
+
+
+//modal editar horas servicio adicional
+$('#EditaHoraADicionalServicio').on('show.bs.modal', function (event) {
+
+    //console.log('modal abierto');
+    /*el button.data es lo que está en el button de editar*/
+    var button = $(event.relatedTarget);
+    var fecha_modal_editar = button.data('fecha');
+    var horas_adicionales_modal_editar = button.data('horas_adicionales');
+    var observaciones_modal_editar = button.data('observaciones');
+    var id_horasservicio = button.data('id_horasservicio');
+    var modal = $(this);
+
+    /*los # son los id que se encuentran en el formulario*/
+    modal.find('.modal-body #fecha').val(fecha_modal_editar);
+    modal.find('.modal-body #horasadicionales').val(horas_adicionales_modal_editar);
+    modal.find('.modal-body #observaciones').val(observaciones_modal_editar);
+    $("#id_horasservicio").val(id_horasservicio);
+})
+
+//Eliminar Horas Adicionales Servicio
+$(document).on("click", ".btnhorasAdicionalesservicio", function () {
+
+    var idhorasservicio = $(this).attr("idhorasservicio");
+    var ruta = $(this).attr("ruta");
+    var url = ruta + "/" + idhorasservicio;
+
+    Swal.fire({
+        title: 'Estas seguro(a)?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, elimínalo!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                data: {
+                    _method: 'DELETE',
+                    idhorasservicio: idhorasservicio
+                },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'DELETE',
+                success: function (res) {
+                    // Do something with the result
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'La hora ha sido eliminado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.history.back(); // Redireccionar a la página anterior
+                    window.location.reload(); // Refrescar la página actual
+                },
+                error: function (data) {
+                    console.log(data);
+                    Swal.fire(
+                        'ERROR!',
+                        'La hora no pudo ser eliminada.',
+                        'error'
+                    )
+                }
+            })
+
+        }
+    })
+});
+
+
+
+
+//modal editar horas contrato adicional
+$('#EditaHoraADicionalContrato').on('show.bs.modal', function (event) {
+
+    //console.log('modal abierto');
+    /*el button.data es lo que está en el button de editar*/
+    var button = $(event.relatedTarget);
+    var fecha_modal_editar = button.data('fecha');
+    var horas_adicionales_modal_editar = button.data('horas_adicionales');
+    var observaciones_modal_editar = button.data('observaciones');
+    var id_horascontrato = button.data('id_horascontrato');
+    var modal = $(this);
+
+    /*los # son los id que se encuentran en el formulario*/
+    modal.find('.modal-body #fecha').val(fecha_modal_editar);
+    modal.find('.modal-body #horasadicionales').val(horas_adicionales_modal_editar);
+    modal.find('.modal-body #observaciones').val(observaciones_modal_editar);
+    $("#id_horascontrato").val(id_horascontrato);
+})
+
+//Eliminar Horas Adicionales Contrato
+$(document).on("click", ".btnhorasAdicionalescontrato", function () {
+
+    var idhorascontrato = $(this).attr("idhorascontrato");
+    var ruta = $(this).attr("ruta");
+    var url = ruta + "/" + idhorascontrato;
+
+    Swal.fire({
+        title: 'Estas seguro(a)?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, elimínalo!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                data: {
+                    _method: 'DELETE',
+                    idhorascontrato: idhorascontrato
+                },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'DELETE',
+                success: function (res) {
+                    // Do something with the result
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'La hora ha sido eliminado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    window.history.back(); // Redireccionar a la página anterior
+                    window.location.reload(); // Refrescar la página actual
+                },
+                error: function (data) {
+                    console.log(data);
+                    Swal.fire(
+                        'ERROR!',
+                        'La hora no pudo ser eliminada.',
                         'error'
                     )
                 }

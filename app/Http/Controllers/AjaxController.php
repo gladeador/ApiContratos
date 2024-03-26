@@ -71,9 +71,21 @@ class AjaxController extends Controller
                     'contrato_id' => $contrato_id
                 ]);
             }
+        }
 
-
-
+        if ($request->tipo == "verifica_servicio") {
+            $organizacion_id = $request->organizacion_id;
+            $contrato_id = DB::table('contratos')->where('organizacion_id', $organizacion_id)->value('id');
+            if ($contrato_id == null) {
+                return response()->json([
+                    'message' => "error"
+                ]);
+            } else {
+                return response()->json([   
+                    'message' => "success",
+                    'contrato_id' => $contrato_id
+                ]);
+            }
         }
 
     }
