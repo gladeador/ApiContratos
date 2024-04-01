@@ -26,7 +26,7 @@ class ApiController extends Controller
         try {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiToken,
-            ])->timeout(30)->get('https://valuedesk2.valuetech.cl/api/v1/organizations');
+            ])->timeout(30)->get(env('APP_URL_API') .'/api/v1/organizations');
 
             return $response->json();
 
@@ -47,7 +47,7 @@ class ApiController extends Controller
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
-        ])->get('https://valuedesk2.valuetech.cl/api/v1/object_manager_attributes');
+        ])->get(env('APP_URL_API') .'/api/v1/object_manager_attributes');
 
         // Decodificar la respuesta JSON
         $data = $response->json();
