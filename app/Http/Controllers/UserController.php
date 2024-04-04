@@ -6,6 +6,8 @@ use Storage;
 use DB;
 use Illuminate\Http\Request;
 use \App\Models\User;
+use \App\Models\Changelog;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -95,7 +97,12 @@ class UserController extends Controller
 
         //fin registrar imagen
         if ($user->save()) {
-
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado un usuario con el Nombre: ' . $user->name;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return redirect('user')->with('toast_success', 'Usuario Creado con Exito!');
         } else {
             return redirect('user')->with('toast_error', 'Error al ingresar el Usuario!');
@@ -169,7 +176,12 @@ class UserController extends Controller
         //fin editar imagen
 
         if ($user->save()) {
-
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'update';
+            $changeLog->details = 'Se ha actualizado un usuario con el Nombre: ' . $user->name;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return redirect('user')->with('toast_success', 'Usuario fua actualizado con Exito!');
         } else {
             return redirect('user')->with('toast_error', 'Error al actualizar el Usuario!');
@@ -182,6 +194,12 @@ class UserController extends Controller
 
         $user = DB::table('users')->where('id', '=', $request->id_usuario);
         if ($user->delete()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'delete';
+            $changeLog->details = 'Se ha eliminado un usuario con el ID: ' . $request->id_usuario;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return response()->json([
                 'message' => "success",
             ]);

@@ -6,6 +6,8 @@ use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use DB;
+use App\Models\ChangeLog;
+use Illuminate\Support\Facades\Auth;
 
 class ServicioController extends Controller
 {
@@ -101,6 +103,12 @@ class ServicioController extends Controller
         $servicio->contrato_id = $request->input('contrato_id');
 
         if ($servicio->save()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado un servicio: ' . $servicio->servicio_tree_select;
+            $changeLog->users_id = Auth::user()->id;
+            $changeLog->save();
             // Instancia el controlador ApiController
             $apiController = new ApiController();
             // Obtiene las organizaciones
@@ -211,6 +219,12 @@ class ServicioController extends Controller
         $servicio->contrato_id = $request->input('contrato_id');
 
         if ($servicio->save()) {
+            // registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'update';
+            $changeLog->details = 'Se ha actualizado un servicio: ' . $servicio->servicio_tree_select;
+            $changeLog->users_id = Auth::user()->id;
+            $changeLog->save();
             // Instancia el controlador ApiController
             $apiController = new ApiController();
             // Obtiene las organizaciones
@@ -256,6 +270,12 @@ class ServicioController extends Controller
         $servicio = DB::table('servicios')->where('id', '=', $request->idservicio);
 
         if ($servicio->delete()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'delete';
+            $changeLog->details = 'Se ha eliminado un servicio con el ID: ' . $request->idservicio;
+            $changeLog->users_id = Auth::user()->id;
+            $changeLog->save();
             return response()->json([
                 'message' => "success",
             ]);

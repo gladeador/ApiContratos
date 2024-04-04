@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ejecutivos;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\ChangeLog;
+use Illuminate\Support\Facades\Auth;
 
 class EjecutivosController extends Controller
 {
@@ -34,6 +36,12 @@ class EjecutivosController extends Controller
         $ejecutivos->descripcion = $request->descripcion;
 
         if($ejecutivos->save()){
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado un ejecutivo con el Nombre: '.$ejecutivos->nombres.' '.$ejecutivos->apellidos;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
 
             return redirect('ejecutivos')->with('toast_success', 'Ejecutivo Creado con Exito!');
         }else{
@@ -70,7 +78,12 @@ class EjecutivosController extends Controller
         $ejecutivos->estado = '1';
 
         if($ejecutivos->save()){
-
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'update';
+            $changeLog->details = 'Se ha actualizado un ejecutivo con el Nombre: '.$ejecutivos->nombres.' '.$ejecutivos->apellidos;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return redirect('ejecutivos')->with('toast_success', 'Ejecutivo actualizado con Exito!');
         }else{
             return redirect('ejecutivos')->with('toast_error', 'Error al actualizar el ejecutivo!');
@@ -85,6 +98,11 @@ class EjecutivosController extends Controller
     {
         $ejecutivos = DB::table('ejecutivos')->where('id', '=', $request->id_ejecutivo);
         if($ejecutivos->delete()){
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'delete';
+            $changeLog->details = 'Se ha eliminado un ejecutivo con el ID: '.$request->id_ejecutivo;
+            $changeLog->users_id = auth()->user()->id;
             return response()->json([
                 'message' => "success"
               ]);

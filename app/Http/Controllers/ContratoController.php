@@ -10,6 +10,8 @@ use App\Models\Servicio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\ChangeLog;
+use Illuminate\Support\Facades\Auth;
 
 class ContratoController extends Controller
 {
@@ -201,6 +203,13 @@ class ContratoController extends Controller
         $contrato->ejecutivo_id = $request->input('ejecutivo_id');
 
         if ($contrato->save()) {
+            //Registro de cambio en el log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado un contrato con la organización ' . $contrato->organizacion_id;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
+
             // Instancia el controlador ApiController
             $apiController = new ApiController();
             // Obtiene las organizaciones
@@ -333,6 +342,13 @@ class ContratoController extends Controller
         $contratos->ejecutivo_id = $request->input('ejecutivo_id');
 
         if ($contratos->save()) {
+            //Registro de cambio en el log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'update';
+            $changeLog->details = 'Se ha actualizado un contrato con la organización ' . $contratos->organizacion_id;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
+
             // Instancia el controlador ApiController
             $apiController = new ApiController();
             // Obtener los datos de la API de organizaciones
@@ -387,6 +403,12 @@ class ContratoController extends Controller
             ]);
         } else {
             if ($contrato->delete()) {
+                //Registro de cambio en el log
+                $changeLog = new ChangeLog();
+                $changeLog->change_type = 'delete';
+                $changeLog->details = 'Se ha eliminado un contrato con la organización ' . $request->idcontrato;
+                $changeLog->users_id = auth()->user()->id;
+                $changeLog->save();
                 return response()->json([
                     'message' => "success",
                 ]);

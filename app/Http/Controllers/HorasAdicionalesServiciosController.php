@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HorasAdicionalesServicios;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\ChangeLog;
+use Illuminate\Support\Facades\Auth;
 
 class HorasAdicionalesServiciosController extends Controller
 {
@@ -44,6 +46,12 @@ class HorasAdicionalesServiciosController extends Controller
         $horasAdicionalesservicios->servicio_id = $request->idservicio;
 
         if ($horasAdicionalesservicios->save()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado un registro de horas adicionales con el ID: ' . $horasAdicionalesservicios->id;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return back()->with('toast_success', 'Horas Adicionales Guardadas');
         } else {
             return back()->with('toast_error', 'Error al Guardar Horas Adicionales');
@@ -80,6 +88,12 @@ class HorasAdicionalesServiciosController extends Controller
         $horasAdicionalesservicios->fecha = $request->fecha;
         $horasAdicionalesservicios->observaciones = $request->observaciones;
         if ($horasAdicionalesservicios->save()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'update';
+            $changeLog->details = 'Se ha actualizado un registro de horas adicionales con el ID: ' . $horasAdicionalesservicios->id;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return back()->with('toast_success', 'Horas Adicionales Actualizadas');
         } else {
             return back()->with('toast_error', 'Error al Actualizar Horas Adicionales');
@@ -95,6 +109,12 @@ class HorasAdicionalesServiciosController extends Controller
         $horas = DB::table('horas_adicionales_servicio')->where('id', '=', $request->idhorasservicio);
 
         if ($horas->delete()) {
+            //registro de cambio de log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'delete';
+            $changeLog->details = 'Se ha eliminado un registro de horas adicionales con el ID: ' . $request->idhorasservicio;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return response()->json([
                 'message' => "success",
             ]);

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Storage;
 use App\Models\Config;
 use Illuminate\Http\Request;
+use App\Models\ChangeLog;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class ConfigController extends Controller
 {
@@ -57,7 +60,12 @@ class ConfigController extends Controller
         $config->logo = $fileNameToStore;
 
         if ($config->save()) {
-
+            // Registro de cambio en el log
+            $changeLog = new ChangeLog();
+            $changeLog->change_type = 'create';
+            $changeLog->details = 'Se ha creado una configuración de la empresa ' . $config->nombre;
+            $changeLog->users_id = auth()->user()->id;
+            $changeLog->save();
             return redirect('configuracion')->with('toast_success', 'Configuración guardada con Exito!');
         } else {
 
